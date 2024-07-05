@@ -19,36 +19,32 @@ $request = $_SERVER['REQUEST_URI'];
 
 define('BASE_PATH', '/clinic/');
 
-
-$controller = new DoctorController($db);
-
+$appiontmentController = new AppointmentController($db);
 switch ($request) {
-    case BASE_PATH:
-        $controller->index();
+    // case BASE_PATH:
+    //     $doctorController->index();
+    //     break;
+    case BASE_PATH . 'get/docappiontments':
+        $appiontmentController->getDocAppointments($_POST['id']);
         break;
-    // case BASE_PATH . 'add':
-    //     $controller->addUser();
-    //     break;
-    // case BASE_PATH . 'show':
-    //     $controller->showUsers();
-    //     break;
-    // case BASE_PATH . 'delete?id=' . $_GET['id']:
-    //     // var_dump($_GET['id']);
-    //     $controller->deleteUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'update?id=' . $_GET['id']:
-    //     $controller->updateUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'edit?id=' . $_GET['id']:
-    //     // var_dump($_GET['id']);
-    //     $controller->editUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'search':
-    //     $controller->searchUsers($_POST['search_term']);
-    //     break;
-    // case BASE_PATH . 'show_search':
-    //     $controller->showSearchedUsers($_GET['search_term']);
-    //     break;
+    case BASE_PATH . 'get/userappointments':
+        $appiontmentController->getUserAppointments($_POST['id']);
+        break;
+    case BASE_PATH . 'get/reportappointment':
+        $appiontmentController->getReportAppointment($_POST['id']);
+        break;
+    case BASE_PATH . 'add/appointment':
+        $appiontmentController->addAppointment($_POST['time'], $_POST['doctor_id'], $_POST['user_id'], $_POST['report_id']);
+        break;
+    case BASE_PATH . 'edit/appointment':
+        $appiontmentController->editAppointment($_POST['id'], $_POST['time'], $_POST['doctor_id'], $_POST['user_id'], $_POST['report_id']);
+        break;
+    case BASE_PATH . 'delete/appointment':
+        $appiontmentController->deleteAppointment($_POST['id']);
+        break;
+    case BASE_PATH . 'search/appointments':
+        $appiontmentController->searchAppointments($_GET['start_date'], $_POST['end_date']);
+        break;
     default:
         // var_dump($request);
         break;
