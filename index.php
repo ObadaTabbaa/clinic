@@ -15,41 +15,51 @@ $db = new MysqliDb(
     $config['db_name']
 );
 
+
 $request = $_SERVER['REQUEST_URI'];
 
 define('BASE_PATH', '/clinic/');
 
 
-$controller = new DoctorController($db);
+$usercontroller= new UserController($db);
 
 switch ($request) {
-    case BASE_PATH:
-        $controller->index();
-        break;
-    // case BASE_PATH . 'add':
-    //     $controller->addUser();
-    //     break;
-    // case BASE_PATH . 'show':
-    //     $controller->showUsers();
-    //     break;
-    // case BASE_PATH . 'delete?id=' . $_GET['id']:
-    //     // var_dump($_GET['id']);
-    //     $controller->deleteUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'update?id=' . $_GET['id']:
-    //     $controller->updateUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'edit?id=' . $_GET['id']:
-    //     // var_dump($_GET['id']);
-    //     $controller->editUser($_GET['id']);
-    //     break;
-    // case BASE_PATH . 'search':
-    //     $controller->searchUsers($_POST['search_term']);
-    //     break;
-    // case BASE_PATH . 'show_search':
-    //     $controller->showSearchedUsers($_GET['search_term']);
-    //     break;
+    // case BASE_PATH . 'log_in':
+    //     $usercontroller->logIn($name,$phone);
+    // break;
+    case BASE_PATH . 'add_user':
+        $usercontroller->addUser($name,$phone,$gender);
+    break;
+    case BASE_PATH . 'show_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->showUser($_GET['id']);
+        } else {
+            echo "User ID not provided.";
+        }
+    break;
+    case BASE_PATH . 'delete_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->deleteUser($_GET['id']);
+        } else {
+            echo "User ID not provided for deletion.";
+        }
+    break;
+    case BASE_PATH . 'update_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->updateUser($_GET['id']);
+        } else {
+            echo "User ID not provided for update.";
+        }
+    break;
+    case BASE_PATH . 'show_report':
+        if (isset($_GET['id'])) {
+            $usercontroller->showReport($_GET['id']);
+        } else {
+            echo "Report ID not provided.";
+        }
+    break;
     default:
-        // var_dump($request);
-        break;
+        echo "Invalid Request";
+    break;
+    
 }
