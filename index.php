@@ -19,9 +19,9 @@ $request = $_SERVER['REQUEST_URI'];
 
 define('BASE_PATH', '/clinic/');
 
-<<<<<<< HEAD
 
 $controller = new DoctorController($db);
+$appiontmentController = new AppointmentController($db);
 
 switch ($request) {
     case BASE_PATH:
@@ -45,13 +45,6 @@ switch ($request) {
     case BASE_PATH . 'deleteDoctor?id=' . $_GET['id']:
         $controller->deleteDoctor($_GET['id']);
         break;
-    default:
-=======
-$appiontmentController = new AppointmentController($db);
-switch ($request) {
-    // case BASE_PATH:
-    //     $doctorController->index();
-    //     break;
     case BASE_PATH . 'get/docappiontments':
         $appiontmentController->getDocAppointments($_POST['id']);
         break;
@@ -74,7 +67,5 @@ switch ($request) {
         $appiontmentController->searchAppointments($_GET['start_date'], $_POST['end_date']);
         break;
     default:
-        // var_dump($request);
->>>>>>> hazem
         break;
 }
