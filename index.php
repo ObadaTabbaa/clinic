@@ -24,9 +24,9 @@ define('BASE_PATH', '/clinic/');
 $usercontroller= new UserController($db);
 
 switch ($request) {
-    // case BASE_PATH . 'log_in':
-    //     $usercontroller->logIn($name,$phone);
-    // break;
+    case BASE_PATH . 'log_in':
+        $usercontroller->logIn($name,$phone);
+    break;
     case BASE_PATH . 'add_user':
         $usercontroller->addUser($name,$phone,$gender);
     break;
