@@ -15,6 +15,7 @@ $db = new MysqliDb(
     $config['db_name']
 );
 
+
 $request = $_SERVER['REQUEST_URI'];
 
 define('BASE_PATH', '/clinic/');
@@ -22,6 +23,7 @@ define('BASE_PATH', '/clinic/');
 
 $controller = new DoctorController($db);
 $appiontmentController = new AppointmentController($db);
+$usercontroller= new UserController($db);
 
 switch ($request) {
     case BASE_PATH:
@@ -66,6 +68,42 @@ switch ($request) {
     case BASE_PATH . 'search/appointments':
         $appiontmentController->searchAppointments($_GET['start_date'], $_POST['end_date']);
         break;
+    // case BASE_PATH . 'log_in':
+    //     $usercontroller->logIn($name,$phone);
+    // break;
+    case BASE_PATH . 'add_user':
+        $usercontroller->addUser($name,$phone,$gender);
+    break;
+    case BASE_PATH . 'show_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->showUser($_GET['id']);
+        } else {
+            echo "User ID not provided.";
+        }
+    break;
+    case BASE_PATH . 'delete_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->deleteUser($_GET['id']);
+        } else {
+            echo "User ID not provided for deletion.";
+        }
+    break;
+    case BASE_PATH . 'update_user':
+        if (isset($_GET['id'])) {
+            $usercontroller->updateUser($_GET['id']);
+        } else {
+            echo "User ID not provided for update.";
+        }
+    break;
+    case BASE_PATH . 'show_report':
+        if (isset($_GET['id'])) {
+            $usercontroller->showReport($_GET['id']);
+        } else {
+            echo "Report ID not provided.";
+        }
+    break;
     default:
-        break;
+        echo "Invalid Request";
+    break;
+    
 }
