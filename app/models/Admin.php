@@ -9,8 +9,13 @@ class Admin
         $this->db = $db;
     }
 
-    public function login()
+    public function login($data)
     {
-        $res = $this->db = 
+        $this->db->where('email', $data['email']);
+        $this->db->where('password', $data['password']);
+        $res = $this->db->getOne('admin');
+        return $res;
     }
+
+
 }
