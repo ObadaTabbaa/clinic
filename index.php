@@ -47,8 +47,8 @@ switch ($request) {
     case BASE_PATH . 'deleteDoctor?id=' . $_GET['id']:
         $controller->deleteDoctor($_GET['id']);
         break;
-    case BASE_PATH . 'get/docappiontments':
-        $appiontmentController->getDocAppointments($_POST['id']);
+    case BASE_PATH . 'get/docappiontments?id=' . $_GET['id']:
+        $appiontmentController->getDocAppointments($_GET['id']);
         break;
     case BASE_PATH . 'get/userappointments':
         $appiontmentController->getUserAppointments($_POST['id']);
@@ -68,34 +68,34 @@ switch ($request) {
     case BASE_PATH . 'search/appointments':
         $appiontmentController->searchAppointments($_GET['start_date'], $_POST['end_date']);
         break;
-    // case BASE_PATH . 'log_in':
-    //     $usercontroller->logIn($name,$phone);
-    // break;
+    case BASE_PATH . 'log_in':
+        $usercontroller->logIn($name,$phone);
+    break;
     case BASE_PATH . 'add_user':
         $usercontroller->addUser($name,$phone,$gender);
     break;
-    case BASE_PATH . 'show_user':
+    case BASE_PATH . 'show_user?id=' . $_GET['id'] :
         if (isset($_GET['id'])) {
             $usercontroller->showUser($_GET['id']);
         } else {
             echo "User ID not provided.";
         }
     break;
-    case BASE_PATH . 'delete_user':
+    case BASE_PATH . 'delete_user'. $_GET['id']:
         if (isset($_GET['id'])) {
             $usercontroller->deleteUser($_GET['id']);
         } else {
             echo "User ID not provided for deletion.";
         }
     break;
-    case BASE_PATH . 'update_user':
+    case BASE_PATH . 'update_user' . $_GET['id']:
         if (isset($_GET['id'])) {
             $usercontroller->updateUser($_GET['id']);
         } else {
             echo "User ID not provided for update.";
         }
     break;
-    case BASE_PATH . 'show_report':
+    case BASE_PATH . 'show_report?id=' . $_GET['id']:
         if (isset($_GET['id'])) {
             $usercontroller->showReport($_GET['id']);
         } else {

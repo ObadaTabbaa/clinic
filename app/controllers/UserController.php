@@ -13,20 +13,25 @@ class UserController {
         echo json_encode($data);
         exit;
     }
-//     public function logIn($name,$phone) {
-//         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//             $name = $_POST['name'];
-//             $phone = $_POST['phone'];
-//             $data = [
-//                 'name' => $name,
-//                 'phone' => $phone,
-//             ];
-//             $res = $this->model->getUser($data);
-//             if ($res) {
-//                 $this->showReport($id);
-//             }
-//     }
-// }
+public function login($name, $phone)
+    {
+        $data = [
+            'name' => $name,
+            'phone' => $phone
+        ];
+        $res = $this->model->login($data);
+        if ($res == null) {
+            $msg = [
+                'msg' => 'this user doesn\'t exist',
+            ];
+            $this->jsonResponse($msg);
+        } else {
+            $msg = [
+                'msg' => 'welcome to the clinic',
+            ];
+            $this->jsonResponse($msg);
+        }
+    }
     public function addUser($name, $phone, $gender)
     {
         $data = [

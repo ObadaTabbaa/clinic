@@ -5,9 +5,13 @@ class User {
     public function __construct($db) {
         $this->db = $db;
     }
-    // public function getUser($data) {
-    //     return $this->db->where('name',$data['name'],'phone',$data['phone'])->get('users');
-    // }
+    public function login($data)
+    {
+        $this->db->where('email', $data['email']);
+        $this->db->where('password', $data['password']);
+        $res = $this->db->getOne('users');
+        return $res;
+    }
     public function addUser($data)
     {
         $this->db->where('name', $data['name']);
